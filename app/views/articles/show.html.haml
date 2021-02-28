@@ -5,6 +5,14 @@
   %li= link_to "Destroy", article_path(@article),
                           method: :delete,
                           data: { confirm: "Are you sure?" }
+%h2 Comments:
+- @article.comments.each do |comment|
+  %p
+    %strong Commenter:
+    = comment.commenter
+  %p
+    %strong Comment:
+    = comment.body
 
 %h2 Add a comment:
 = form_with model: [ @article, @article.comments.build ], local: true do |form|
