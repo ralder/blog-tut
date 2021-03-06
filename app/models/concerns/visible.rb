@@ -1,19 +1,12 @@
 module Visible
   extend ActiveSupport::Concern
+  extend Enumerize
 
-  included do
-    VALID_STATUSES = ['public', 'private', 'archived']
-
-    validates :status, inclusion: { in: VALID_STATUSES }
-  end
+  enumerize :status, in: %w[public private archived], predicates: true, scope: :having_status
 
   class_methods do
     def public_count
-      where(status: 'public').count
+      having_status(:public).count
     end
-  end
-
-  def archived?
-    status == 'archived'
   end
 end
