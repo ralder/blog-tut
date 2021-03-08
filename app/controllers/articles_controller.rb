@@ -42,6 +42,14 @@ class ArticlesController < ApplicationController
     redirect_to root_path
   end
 
+  def archive
+    @article = Article.find(params[:id])
+    @article.archive
+
+    @article.save
+    redirect_to @article
+  end
+
   private
 
   def article_params

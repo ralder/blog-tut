@@ -1,3 +1,6 @@
 %h1 Edit article
 
 = render "form", article: @article
+
+- if @article.may_archive?
+  %p= link_to 'Archive article', archive_article_path(@article), method: :post
